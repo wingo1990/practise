@@ -1,3 +1,5 @@
+#include <unistd.h>
+
 #include <iostream>
 #include <thread>
 
@@ -7,6 +9,17 @@ public:
 	// this const keyword say that this function cannot modify any member parameters.
 	void operator()() const {
 		std::cout << "hello, this is callable object." << std::endl;	
+	}
+};
+
+struct call_fun {
+	int& m_i;
+	call_fun(int& i): m_i(i) {}
+	void operator()() {
+		for (unsigned j = 0; j < 10; j++) {
+			std::cout << "local is " << m_i << ", num is " << j << std::endl;
+			sleep(2);
+		}
 	}
 };
 
@@ -32,6 +45,11 @@ int main () {
 	});
 	// if no this statement, the program will be core.
 	t2.join();
-		
+	
+	int local = 0;
+	call_fun func(local);
+	std::thread t3(func);
+	t3.detach();
+	sleep(6);
 	return 0;
 }

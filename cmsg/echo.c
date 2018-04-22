@@ -40,6 +40,7 @@ int main()
 		fprintf(stderr,"name: %p, len: %d\n", msg.msg_name, msg.msg_namelen);
 	}
 	
+	fprintf(stderr,"recvmsg ret: %d\n", size);
 	fprintf(stderr,"recv iov1: %s\n", iov_buff1);
 	fprintf(stderr,"recv iov2: %s\n", iov_buff2);
 

@@ -3,4 +3,4 @@ main:
 	cc -o echo echo.c
 
 clean:
-	rm echo main echo.txt test.txt
+	@rm echo main echo.txt test.txt
